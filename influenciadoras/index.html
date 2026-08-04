@@ -1,0 +1,498 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#fff5f9">
+  <meta name="color-scheme" content="light">
+  <title>Seja uma influenciadora LB FIT | Lara Biagioni</title>
+  <meta name="description" content="Inscreva-se para fazer parte do time de influenciadoras e embaixadoras LB FIT.">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <link rel="canonical" href="https://larabiagioni.com.br/influenciadoras/">
+  <link rel="icon" type="image/png" href="../links/assets/favicon.png">
+  <link rel="apple-touch-icon" href="../links/assets/icon-192.png">
+
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:title" content="Seja uma influenciadora LB FIT">
+  <meta property="og:description" content="Moda fitness, conteúdo autêntico e uma parceria feita para crescer junto.">
+  <meta property="og:url" content="https://larabiagioni.com.br/influenciadoras/">
+  <meta property="og:image" content="https://larabiagioni.com.br/links/assets/og-lara-biagioni.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="preload" href="assets/lara-hero.webp" as="image" type="image/webp">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="ambient ambient-one" aria-hidden="true"></div>
+  <div class="ambient ambient-two" aria-hidden="true"></div>
+  <div class="grain" aria-hidden="true"></div>
+
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="back-link" href="../links/index.html" aria-label="Voltar para os links de Lara Biagioni">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 5-7 7 7 7"/></svg>
+        <span>Voltar</span>
+      </a>
+      <div class="mini-brand" aria-label="Lara Biagioni e LB FIT">
+        <span class="mini-brand-lb">LB</span>
+        <span><strong>LB FIT</strong><small>Influenciadoras</small></span>
+      </div>
+      <span class="step-counter" id="stepCounter" aria-live="polite">Apresentação</span>
+    </div>
+    <div class="progress" aria-hidden="true"><span id="progressBar"></span></div>
+  </header>
+
+  <main class="form-page">
+    <form id="applicationForm" novalidate autocomplete="on">
+      <section class="step intro-step is-active" data-step="0" aria-labelledby="intro-title">
+        <div class="intro-card">
+          <div class="intro-photo-wrap" aria-hidden="true">
+            <span class="photo-glow"></span>
+            <img src="assets/lara-hero.webp" alt="" width="640" height="640" fetchpriority="high">
+            <span class="photo-badge">INSCRIÇÕES ABERTAS</span>
+          </div>
+
+          <div class="intro-copy">
+            <p class="eyebrow">PROGRAMA DE INFLUENCIADORAS</p>
+            <h1 id="intro-title"><span>💖</span> Seja uma influenciadora <em>LB FIT</em></h1>
+            <p class="lead">A LB Fit está expandindo seu time de influenciadoras e embaixadoras. Se você ama moda fitness, academia, lifestyle e criar conteúdo nas redes sociais, queremos conhecer você! ✨</p>
+
+            <div class="benefits" aria-label="Benefícios do programa">
+              <p><span>✨</span> Cupom de desconto personalizado</p>
+              <p><span>✨</span> Comissão sobre cada venda válida</p>
+              <p><span>✨</span> Looks e mimos da LB Fit</p>
+              <p><span>✨</span> Lançamentos, collabs e produções</p>
+              <p><span>✨</span> Convites para ensaios e conteúdos</p>
+              <p><span>✨</span> Oportunidade de treino no CT Fernando Sardinha</p>
+              <p><span>✨</span> Participação no time oficial LB Fit</p>
+            </div>
+
+            <div class="intro-note">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20Z"/><path d="M12 11v6M12 7.5h.01"/></svg>
+              <span>O preenchimento leva cerca de 4 minutos. Você poderá revisar tudo antes de enviar.</span>
+            </div>
+
+            <button class="primary-button intro-button" type="button" data-next>
+              <span>Começar minha inscrição</span>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <section class="step" data-step="1" aria-labelledby="step-1-title" hidden>
+        <div class="question-card">
+          <div class="section-heading">
+            <span class="section-icon">01</span>
+            <div>
+              <p class="eyebrow">SOBRE VOCÊ</p>
+              <h2 id="step-1-title">Vamos começar pelo básico</h2>
+              <p>Conte quem você é e onde mora.</p>
+            </div>
+          </div>
+
+          <div class="fields-grid">
+            <div class="field field-full">
+              <label for="fullName">Qual é o seu nome completo?</label>
+              <input id="fullName" name="fullName" type="text" placeholder="Ex.: Ana Carolina Silva" autocomplete="name" maxlength="120" required>
+              <p class="field-hint">Digite seu nome e sobrenome.</p>
+              <p class="field-error" data-error-for="fullName"></p>
+            </div>
+
+            <div class="field">
+              <label for="age">Qual é a sua idade?</label>
+              <div class="input-suffix">
+                <input id="age" name="age" type="number" inputmode="numeric" min="13" max="99" placeholder="Ex.: 24" required>
+                <span>anos</span>
+              </div>
+              <p class="field-error" data-error-for="age"></p>
+            </div>
+
+            <div class="field">
+              <label for="city">Em qual cidade você mora?</label>
+              <input id="city" name="city" type="text" placeholder="Ex.: Passos" autocomplete="address-level2" maxlength="80" required>
+              <p class="field-error" data-error-for="city"></p>
+            </div>
+
+            <div class="field field-full">
+              <label for="state">Qual é o estado?</label>
+              <div class="select-wrap">
+                <select id="state" name="state" autocomplete="address-level1" required>
+                  <option value="">Selecione seu estado</option>
+                  <option value="AC">Acre</option><option value="AL">Alagoas</option><option value="AP">Amapá</option><option value="AM">Amazonas</option>
+                  <option value="BA">Bahia</option><option value="CE">Ceará</option><option value="DF">Distrito Federal</option><option value="ES">Espírito Santo</option>
+                  <option value="GO">Goiás</option><option value="MA">Maranhão</option><option value="MT">Mato Grosso</option><option value="MS">Mato Grosso do Sul</option>
+                  <option value="MG">Minas Gerais</option><option value="PA">Pará</option><option value="PB">Paraíba</option><option value="PR">Paraná</option>
+                  <option value="PE">Pernambuco</option><option value="PI">Piauí</option><option value="RJ">Rio de Janeiro</option><option value="RN">Rio Grande do Norte</option>
+                  <option value="RS">Rio Grande do Sul</option><option value="RO">Rondônia</option><option value="RR">Roraima</option><option value="SC">Santa Catarina</option>
+                  <option value="SP">São Paulo</option><option value="SE">Sergipe</option><option value="TO">Tocantins</option>
+                </select>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m7 10 5 5 5-5"/></svg>
+              </div>
+              <p class="field-error" data-error-for="state"></p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="step" data-step="2" aria-labelledby="step-2-title" hidden>
+        <div class="question-card">
+          <div class="section-heading">
+            <span class="section-icon">02</span>
+            <div>
+              <p class="eyebrow">SEU CONTATO</p>
+              <h2 id="step-2-title">Como falamos com você?</h2>
+              <p>Usaremos estes dados somente para analisar a inscrição e entrar em contato sobre o programa.</p>
+            </div>
+          </div>
+
+          <div class="fields-grid single-column">
+            <div class="field">
+              <label for="whatsapp">Qual é o seu WhatsApp?</label>
+              <div class="input-prefix">
+                <span>+55</span>
+                <input id="whatsapp" name="whatsapp" type="tel" inputmode="tel" placeholder="(35) 99999-9999" autocomplete="tel-national" maxlength="16" required>
+              </div>
+              <p class="field-hint">Inclua o DDD. Este será o canal oficial de contato.</p>
+              <p class="field-error" data-error-for="whatsapp"></p>
+            </div>
+
+            <div class="field">
+              <label for="email">Qual é o seu e-mail?</label>
+              <input id="email" name="email" type="email" inputmode="email" placeholder="Ex.: ana@email.com" autocomplete="email" maxlength="160" required>
+              <p class="field-error" data-error-for="email"></p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="step" data-step="3" aria-labelledby="step-3-title" hidden>
+        <div class="question-card">
+          <div class="section-heading">
+            <span class="section-icon">03</span>
+            <div>
+              <p class="eyebrow">SUAS REDES</p>
+              <h2 id="step-3-title">Onde você cria conteúdo?</h2>
+              <p>Informe seus perfis para que nosso time consiga conhecer melhor o seu trabalho.</p>
+            </div>
+          </div>
+
+          <div class="fields-grid single-column">
+            <div class="field">
+              <label for="instagram">Qual é o seu @ do Instagram?</label>
+              <div class="input-prefix handle-prefix">
+                <span>@</span>
+                <input id="instagram" name="instagram" type="text" placeholder="usuariox" autocomplete="off" autocapitalize="none" spellcheck="false" maxlength="80" required>
+              </div>
+              <p class="field-hint">Você pode digitar apenas o usuário ou colar o link do perfil.</p>
+              <p class="field-error" data-error-for="instagram"></p>
+            </div>
+
+            <fieldset class="field option-field" data-group="socialNetworks">
+              <legend>Você possui outras redes sociais?</legend>
+              <p class="field-hint before-options">Selecione todas que se aplicam.</p>
+              <div class="option-grid option-grid-two">
+                <label class="choice-card">
+                  <input type="checkbox" name="socialNetworks" value="TikTok">
+                  <span class="choice-mark"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 12 4 4 8-8"/></svg></span>
+                  <span><strong>TikTok</strong><small>Tenho perfil ativo</small></span>
+                </label>
+                <label class="choice-card">
+                  <input type="checkbox" name="socialNetworks" value="YouTube">
+                  <span class="choice-mark"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 12 4 4 8-8"/></svg></span>
+                  <span><strong>YouTube</strong><small>Tenho canal</small></span>
+                </label>
+                <label class="choice-card">
+                  <input type="checkbox" name="socialNetworks" value="Outra">
+                  <span class="choice-mark"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 12 4 4 8-8"/></svg></span>
+                  <span><strong>Outra</strong><small>Outra plataforma</small></span>
+                </label>
+                <label class="choice-card choice-none">
+                  <input type="checkbox" name="socialNetworks" value="Não possuo" data-exclusive>
+                  <span class="choice-mark"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 12 4 4 8-8"/></svg></span>
+                  <span><strong>Não possuo</strong><small>Somente Instagram</small></span>
+                </label>
+              </div>
+              <p class="field-error" data-error-for="socialNetworks"></p>
+            </fieldset>
+
+            <div class="conditional-fields" id="tiktokFields" hidden>
+              <div class="field">
+                <label for="tiktok">Qual é o seu @ ou link do TikTok?</label>
+                <input id="tiktok" name="tiktok" type="text" placeholder="Ex.: @usuariox" autocapitalize="none" spellcheck="false" maxlength="180">
+                <p class="field-error" data-error-for="tiktok"></p>
+              </div>
+            </div>
+
+            <div class="conditional-fields" id="youtubeFields" hidden>
+              <div class="field">
+                <label for="youtube">Qual é o @ ou link do seu canal no YouTube?</label>
+                <input id="youtube" name="youtube" type="text" placeholder="Ex.: youtube.com/@usuariox" autocapitalize="none" spellcheck="false" maxlength="220">
+                <p class="field-error" data-error-for="youtube"></p>
+              </div>
+            </div>
+
+            <div class="conditional-fields other-network-grid" id="otherNetworkFields" hidden>
+              <div class="field">
+                <label for="otherNetworkName">Qual é a rede?</label>
+                <input id="otherNetworkName" name="otherNetworkName" type="text" placeholder="Ex.: Kwai" maxlength="60">
+                <p class="field-error" data-error-for="otherNetworkName"></p>
+              </div>
+              <div class="field">
+                <label for="otherNetworkLink">Qual é o @ ou link?</label>
+                <input id="otherNetworkLink" name="otherNetworkLink" type="text" placeholder="Ex.: @usuariox" autocapitalize="none" spellcheck="false" maxlength="220">
+                <p class="field-error" data-error-for="otherNetworkLink"></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="step" data-step="4" aria-labelledby="step-4-title" hidden>
+        <div class="question-card">
+          <div class="section-heading">
+            <span class="section-icon">04</span>
+            <div>
+              <p class="eyebrow">SEU CONTEÚDO</p>
+              <h2 id="step-4-title">Queremos conhecer sua rotina criativa</h2>
+              <p>Não existe uma resposta “certa”. Buscamos perfis autênticos e alinhados com a marca.</p>
+            </div>
+          </div>
+
+          <fieldset class="field option-field" data-group="followers">
+            <legend>Quantos seguidores você possui no Instagram?</legend>
+            <div class="stacked-options lettered-options">
+              <label class="radio-card"><input type="radio" name="followers" value="Até 2 mil"><span class="option-letter">A</span><span>Até 2 mil</span><span class="radio-dot"></span></label>
+              <label class="radio-card"><input type="radio" name="followers" value="2 mil – 10 mil"><span class="option-letter">B</span><span>2 mil – 10 mil</span><span class="radio-dot"></span></label>
+              <label class="radio-card"><input type="radio" name="followers" value="10 mil – 50 mil"><span class="option-letter">C</span><span>10 mil – 50 mil</span><span class="radio-dot"></span></label>
+              <label class="radio-card"><input type="radio" name="followers" value="50 mil – 100 mil"><span class="option-letter">D</span><span>50 mil – 100 mil</span><span class="radio-dot"></span></label>
+              <label class="radio-card"><input type="radio" name="followers" value="Mais de 100 mil"><span class="option-letter">E</span><span>Mais de 100 mil</span><span class="radio-dot"></span></label>
+            </div>
+            <p class="field-error" data-error-for="followers"></p>
+          </fieldset>
+
+          <fieldset class="field option-field" data-group="contentType">
+            <legend>Qual tipo de conteúdo você mais produz?</legend>
+            <div class="option-grid option-grid-two compact-options">
+              <label class="radio-card"><input type="radio" name="contentType" value="Fitness/Academia"><span>Fitness / Academia</span><span class="radio-dot"></span></label>
+              <label class="radio-card"><input type="radio" name="contentType" value="Moda/Looks"><span>Moda / Looks</span><span class="radio-dot"></span></label>
+              <label class="radio-card"><input type="radio" name="contentType" value="Lifestyle"><span>Lifestyle</span><span class="radio-dot"></span></label>
+              <label class="radio-card"><input type="radio" name="contentType" value="Beleza"><span>Beleza</span><span class="radio-dot"></span></label>
+              <label class="radio-card"><input type="radio" name="contentType" value="Vlogs/Dia a dia"><span>Vlogs / Dia a dia</span><span class="radio-dot"></span></label>
+              <label class="radio-card"><input type="radio" name="contentType" value="Outro"><span>Outro</span><span class="radio-dot"></span></label>
+            </div>
+            <p class="field-error" data-error-for="contentType"></p>
+          </fieldset>
+
+          <div class="conditional-fields" id="contentOtherFields" hidden>
+            <div class="field">
+              <label for="contentOther">Qual tipo de conteúdo?</label>
+              <input id="contentOther" name="contentOther" type="text" placeholder="Ex.: Corrida e bem-estar" maxlength="100">
+              <p class="field-error" data-error-for="contentOther"></p>
+            </div>
+          </div>
+
+          <fieldset class="field option-field" data-group="frequency">
+            <legend>Com que frequência você produz conteúdo?</legend>
+            <div class="stacked-options">
+              <label class="radio-card"><input type="radio" name="frequency" value="Todos os dias"><span>Todos os dias</span><span class="radio-dot"></span></label>
+              <label class="radio-card"><input type="radio" name="frequency" value="3 a 5 vezes por semana"><span>3 a 5 vezes por semana</span><span class="radio-dot"></span></label>
+              <label class="radio-card"><input type="radio" name="frequency" value="1 a 2 vezes por semana"><span>1 a 2 vezes por semana</span><span class="radio-dot"></span></label>
+              <label class="radio-card"><input type="radio" name="frequency" value="Algumas vezes por mês"><span>Algumas vezes por mês</span><span class="radio-dot"></span></label>
+              <label class="radio-card"><input type="radio" name="frequency" value="Raramente"><span>Raramente</span><span class="radio-dot"></span></label>
+            </div>
+            <p class="field-error" data-error-for="frequency"></p>
+          </fieldset>
+        </div>
+      </section>
+
+      <section class="step" data-step="5" aria-labelledby="step-5-title" hidden>
+        <div class="question-card">
+          <div class="section-heading">
+            <span class="section-icon">05</span>
+            <div>
+              <p class="eyebrow">VOCÊ + LB FIT</p>
+              <h2 id="step-5-title">Agora queremos conhecer você de verdade</h2>
+              <p>Conte como se imagina criando junto com a LB Fit.</p>
+            </div>
+          </div>
+
+          <fieldset class="field option-field" data-group="comfortableVideo">
+            <legend>Você se sente confortável em aparecer em vídeos usando e mostrando os looks da LB Fit?</legend>
+            <div class="stacked-options">
+              <label class="radio-card"><input type="radio" name="comfortableVideo" value="Sim"><span>Sim</span><span class="radio-dot"></span></label>
+              <label class="radio-card"><input type="radio" name="comfortableVideo" value="Não"><span>Não</span><span class="radio-dot"></span></label>
+              <label class="radio-card"><input type="radio" name="comfortableVideo" value="Depende do tipo de conteúdo"><span>Depende do tipo de conteúdo</span><span class="radio-dot"></span></label>
+            </div>
+            <p class="field-error" data-error-for="comfortableVideo"></p>
+          </fieldset>
+
+          <fieldset class="field option-field" data-group="discoveredBy">
+            <legend>Como você conheceu a LB Fit?</legend>
+            <div class="option-grid option-grid-two compact-options">
+              <label class="radio-card"><input type="radio" name="discoveredBy" value="Instagram"><span>Instagram</span><span class="radio-dot"></span></label>
+              <label class="radio-card"><input type="radio" name="discoveredBy" value="TikTok"><span>TikTok</span><span class="radio-dot"></span></label>
+              <label class="radio-card"><input type="radio" name="discoveredBy" value="Indicação"><span>Indicação</span><span class="radio-dot"></span></label>
+              <label class="radio-card"><input type="radio" name="discoveredBy" value="Já sou cliente"><span>Já sou cliente</span><span class="radio-dot"></span></label>
+              <label class="radio-card"><input type="radio" name="discoveredBy" value="Através da Lara"><span>Através da Lara</span><span class="radio-dot"></span></label>
+              <label class="radio-card"><input type="radio" name="discoveredBy" value="Outro"><span>Outro</span><span class="radio-dot"></span></label>
+            </div>
+            <p class="field-error" data-error-for="discoveredBy"></p>
+          </fieldset>
+
+          <div class="conditional-fields" id="discoveredOtherFields" hidden>
+            <div class="field">
+              <label for="discoveredOther">Conte como você conheceu a marca</label>
+              <input id="discoveredOther" name="discoveredOther" type="text" placeholder="Ex.: Em um evento de corrida" maxlength="120">
+              <p class="field-error" data-error-for="discoveredOther"></p>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="motivation">Por que você gostaria de fazer parte do time de influenciadoras LB Fit?</label>
+            <textarea id="motivation" name="motivation" rows="6" placeholder="Ex.: Eu me identifico com a proposta da marca porque..." minlength="25" maxlength="1200" required></textarea>
+            <div class="textarea-meta"><span>Seja autêntica — queremos conhecer sua história.</span><span id="motivationCount">0/1200</span></div>
+            <p class="field-error" data-error-for="motivation"></p>
+          </div>
+        </div>
+      </section>
+
+      <section class="step" data-step="6" aria-labelledby="step-6-title" hidden>
+        <div class="question-card program-card">
+          <div class="section-heading">
+            <span class="section-icon">06</span>
+            <div>
+              <p class="eyebrow">A PARCERIA</p>
+              <h2 id="step-6-title">Como funciona o programa?</h2>
+              <p>Leia com atenção as condições e responsabilidades antes de finalizar.</p>
+            </div>
+          </div>
+
+          <div class="program-section">
+            <h3><span>💗</span> Como funciona a parceria?</h3>
+            <div class="info-grid">
+              <article class="info-card">
+                <span class="info-icon">🛍️</span>
+                <div><h4>10% OFF para seus seguidores</h4><p>Seu cupom personalizado garante 10% de desconto nas compras realizadas no site da LB Fit.</p></div>
+              </article>
+              <article class="info-card">
+                <span class="info-icon">💰</span>
+                <div><h4>10% de comissão para você</h4><p>Você recebe 10% de comissão sobre cada venda válida e concluída realizada com o seu cupom.</p></div>
+              </article>
+              <article class="info-card">
+                <span class="info-icon">📊</span>
+                <div><h4>Acompanhamento das vendas</h4><p>As vendas com seu cupom serão registradas pela LB Fit. As informações serão enviadas pelo WhatsApp oficial da marca.</p></div>
+              </article>
+              <article class="info-card">
+                <span class="info-icon">💸</span>
+                <div><h4>Pagamento das comissões</h4><p>As comissões serão contabilizadas mensalmente e pagas via PIX, conforme as vendas válidas do período.</p></div>
+              </article>
+              <article class="info-card info-card-wide">
+                <span class="info-icon">💬</span>
+                <div><h4>Comunicação</h4><p>A comunicação será realizada pelo WhatsApp oficial da marca, incluindo vendas, comissões, recebidos, lançamentos e demais assuntos da parceria.</p></div>
+              </article>
+            </div>
+          </div>
+
+          <div class="program-section responsibilities">
+            <h3><span>💗</span> Responsabilidades da influenciadora</h3>
+            <div class="responsibility-list">
+              <p><span>📲</span> Fazer Stories usando e mostrando os looks da LB Fit, divulgando o cupom personalizado e marcando <strong>@use.lbfit</strong>.</p>
+              <p><span>🎥</span> Publicar pelo menos <strong>1 Reel por mês</strong> utilizando looks da LB Fit, marcando a marca e divulgando o cupom.</p>
+              <p><span>🛍️</span> Apoiar a divulgação de lançamentos, promoções e lives da LB Fit através dos Stories.</p>
+              <p><span>✨</span> Produzir conteúdos de forma espontânea e autêntica, mantendo seu próprio estilo e linguagem.</p>
+              <p><span>💕</span> A permanência no programa está sujeita à participação e ao cumprimento das condições da parceria.</p>
+            </div>
+          </div>
+
+          <div class="program-note">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8l1.1 1.1L12 21l7.8-7.5 1.1-1.1a5.5 5.5 0 0 0-.1-7.8Z"/></svg>
+            <p>A aprovação não é automática. Cada perfil será analisado pela equipe LB Fit de acordo com o alinhamento à marca e às necessidades atuais do programa.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="step" data-step="7" aria-labelledby="step-7-title" hidden>
+        <div class="question-card review-card">
+          <div class="section-heading">
+            <span class="section-icon">07</span>
+            <div>
+              <p class="eyebrow">REVISÃO FINAL</p>
+              <h2 id="step-7-title">Está tudo certo?</h2>
+              <p>Confira as principais informações antes de enviar sua inscrição.</p>
+            </div>
+          </div>
+
+          <div class="review-summary" id="reviewSummary"></div>
+
+          <button class="edit-answers" type="button" data-go-step="1">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20h9M16.5 3.5a2.1 2.1 0 0 1 3 3L8 18l-4 1 1-4L16.5 3.5Z"/></svg>
+            Revisar minhas respostas
+          </button>
+
+          <label class="consent-card">
+            <input id="consent" name="consent" type="checkbox" value="Sim, concordo" required>
+            <span class="consent-check"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 12 4 4 8-8"/></svg></span>
+            <span>Li e concordo com as condições do Programa de Influenciadoras LB Fit e autorizo o uso dos dados enviados para análise e contato sobre esta inscrição. 💗</span>
+          </label>
+          <p class="field-error consent-error" data-error-for="consent"></p>
+
+          <div class="privacy-note">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/><path d="m9 12 2 2 4-4"/></svg>
+            <p>Seus dados não ficam públicos e serão usados pela LB Fit somente para avaliar esta inscrição e realizar contatos relacionados ao programa.</p>
+          </div>
+
+          <div class="form-alert" id="formAlert" role="alert" hidden></div>
+
+          <div class="honeypot" aria-hidden="true">
+            <label for="website">Não preencha este campo</label>
+            <input id="website" name="website" type="text" tabindex="-1" autocomplete="off">
+          </div>
+        </div>
+      </section>
+
+      <section class="step success-step" data-step="8" aria-labelledby="success-title" hidden>
+        <div class="success-card">
+          <div class="success-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8l1.1 1.1L12 21l7.8-7.5 1.1-1.1a5.5 5.5 0 0 0-.1-7.8Z"/><path class="success-check" d="m8.4 12.2 2.2 2.2 5-5"/></svg>
+          </div>
+          <p class="eyebrow">TUDO CERTO</p>
+          <h2 id="success-title">Inscrição enviada! 💕</h2>
+          <p>Obrigada pelo interesse em fazer parte do time LB Fit. Nossa equipe irá analisar suas informações e, caso seu perfil seja selecionado, entraremos em contato pelo WhatsApp informado no cadastro.</p>
+          <div class="success-reference" id="successReference" hidden></div>
+          <a class="primary-button" href="../links/index.html">
+            <span>Voltar para os links da Lara</span>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg>
+          </a>
+        </div>
+      </section>
+
+      <div class="form-navigation" id="formNavigation" hidden>
+        <button class="secondary-button" type="button" data-back>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 5-7 7 7 7"/></svg>
+          <span>Voltar</span>
+        </button>
+        <button class="primary-button" id="nextButton" type="button" data-next>
+          <span>Continuar</span>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg>
+        </button>
+        <button class="primary-button submit-button" id="submitButton" type="submit" hidden>
+          <span class="button-label">Enviar minha inscrição</span>
+          <span class="button-loading" aria-hidden="true"><span class="spinner"></span> Enviando...</span>
+          <svg class="button-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg>
+        </button>
+      </div>
+    </form>
+  </main>
+
+  <iframe id="googleSheetsReceiver" name="googleSheetsReceiver" title="Envio seguro do formulário" hidden></iframe>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="config.js"></script>
+  <script src="app.js" defer></script>
+</body>
+</html>

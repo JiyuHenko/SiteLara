@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Confirmação LB FIT</title>
+</head>
+<body>
+  <p id="status">Confirmando envio...</p>
+  <script>
+  (() => {
+    let payload = null;
+    try {
+      const raw = location.hash.slice(1);
+      if (raw) payload = JSON.parse(decodeURIComponent(raw));
+    } catch (_) {}
+
+    if (payload) {
+      try { window.parent.postMessage(payload, '*'); } catch (_) {}
+      document.getElementById('status').textContent = payload.status === 'success'
+        ? 'Inscrição confirmada.'
+        : 'Não foi possível confirmar a inscrição.';
+    } else {
+      document.getElementById('status').textContent = 'Retorno inválido.';
+    }
+  })();
+  </script>
+</body>
+</html>
