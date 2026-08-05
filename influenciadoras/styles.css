@@ -458,3 +458,16 @@ input.is-invalid, select.is-invalid, textarea.is-invalid { border-color: rgba(18
   border-color: rgba(184, 50, 82, .48);
 }
 
+
+/* Receptor do Google fora da tela. Evita que navegadores internos suspendam
+   a execução do iframe quando ele usa o atributo hidden/display:none. */
+.submission-receiver {
+  position: fixed !important;
+  left: -10000px !important;
+  bottom: 0 !important;
+  width: 2px !important;
+  height: 2px !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  border: 0 !important;
+}

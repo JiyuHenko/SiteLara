@@ -34,7 +34,9 @@
   let toastTimer;
   let saveTimer;
   let submitTimer;
+  let statusPollTimer;
   let pendingSubmissionId = "";
+  let statusPollStartedAt = 0;
 
   const $ = (selector, root = document) => root.querySelector(selector);
   const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
@@ -537,6 +539,39 @@
     window.setTimeout(() => bridgeForm.remove(), 1200);
   }
 
+  function stopConfirmationWatch() {
+    clearTimeout(submitTimer);
+    clearTimeout(statusPollTimer);
+    statusPollTimer = null;
+    statusPollStartedAt = 0;
+  }
+
+  function finishSubmissionSuccess(data = {}) {
+    if (!pendingSubmissionId) return;
+
+    stopConfirmationWatch();
+    setSubmitting(false);
+    clearDraft();
+    clearFormAlert();
+
+    if (data.reference) {
+      successReference.textContent = `Protocolo: ${data.reference}`;
+      successReference.hidden = false;
+    }
+
+    pendingSubmissionId = "";
+    showStep(8);
+    form.reset();
+    updateConditionalFields();
+  }
+
+  function finishSubmissionError(message) {
+    stopConfirmationWatch();
+    setSubmitting(false);
+    pendingSubmissionId = "";
+    showFormAlert(message || "Não foi possível registrar a inscrição. Confira sua conexão e tente novamente.");
+  }
+
   function handleSubmissionMessage(event) {
     const data = event.data;
     if (!data || data.source !== "lbfit-influencer-form") return;
@@ -548,25 +583,77 @@
     if (!allowed) return;
     if (!pendingSubmissionId || data.submissionId !== pendingSubmissionId) return;
 
-    clearTimeout(submitTimer);
-    setSubmitting(false);
-
     if (data.status === "success") {
-      clearDraft();
-      clearFormAlert();
-      if (data.reference) {
-        successReference.textContent = `Protocolo: ${data.reference}`;
-        successReference.hidden = false;
-      }
-      showStep(8);
-      form.reset();
-      updateConditionalFields();
-      pendingSubmissionId = "";
+      finishSubmissionSuccess(data);
       return;
     }
 
-    pendingSubmissionId = "";
-    showFormAlert(data.message || "Não foi possível registrar a inscrição. Confira sua conexão e tente novamente.");
+    finishSubmissionError(data.message);
+  }
+
+  function checkSubmissionStatus(submissionId) {
+    if (!submissionId || submissionId !== pendingSubmissionId) return;
+
+    const callbackName = `__lbfitStatus_${submissionId.replace(/[^a-z0-9]/gi, "").slice(-20)}`;
+    const script = document.createElement("script");
+    const endpoint = new URL(config.googleAppsScriptUrl);
+
+    endpoint.searchParams.set("action", "status");
+    endpoint.searchParams.set("submissionId", submissionId);
+    endpoint.searchParams.set("callback", callbackName);
+    endpoint.searchParams.set("_", String(Date.now()));
+
+    const cleanup = () => {
+      script.remove();
+      try { delete window[callbackName]; } catch (_) { window[callbackName] = undefined; }
+    };
+
+    window[callbackName] = (data) => {
+      cleanup();
+      if (!pendingSubmissionId || submissionId !== pendingSubmissionId) return;
+
+      if (data && data.found) {
+        finishSubmissionSuccess({
+          status: "success",
+          submissionId,
+          reference: data.reference || ""
+        });
+        return;
+      }
+
+      scheduleNextStatusCheck(submissionId);
+    };
+
+    script.onerror = () => {
+      cleanup();
+      scheduleNextStatusCheck(submissionId);
+    };
+
+    script.async = true;
+    script.src = endpoint.toString();
+    document.head.appendChild(script);
+  }
+
+  function scheduleNextStatusCheck(submissionId) {
+    if (!pendingSubmissionId || submissionId !== pendingSubmissionId) return;
+
+    const timeoutMs = Number(config.confirmationTimeoutMs) || 30000;
+    const intervalMs = Number(config.confirmationPollIntervalMs) || 1100;
+    const elapsed = Date.now() - statusPollStartedAt;
+
+    if (elapsed >= timeoutMs) {
+      finishSubmissionError("A inscrição foi enviada, mas não conseguimos confirmar automaticamente. Aguarde alguns segundos e consulte a planilha antes de tentar novamente; o sistema evita inscrições duplicadas.");
+      return;
+    }
+
+    clearTimeout(statusPollTimer);
+    statusPollTimer = setTimeout(() => checkSubmissionStatus(submissionId), intervalMs);
+  }
+
+  function startConfirmationWatch(submissionId) {
+    statusPollStartedAt = Date.now();
+    clearTimeout(statusPollTimer);
+    statusPollTimer = setTimeout(() => checkSubmissionStatus(submissionId), 900);
   }
 
   function validateAllQuestionSteps() {
@@ -602,13 +689,9 @@
     setSubmitting(true);
     postToGoogleSheets(payload);
 
-    clearTimeout(submitTimer);
-    submitTimer = setTimeout(() => {
-      if (!pendingSubmissionId) return;
-      setSubmitting(false);
-      pendingSubmissionId = "";
-      showFormAlert("O envio pode ter sido registrado, mas o navegador não conseguiu receber a confirmação. Atualize a planilha antes de tentar novamente; o identificador da inscrição evita duplicidade.");
-    }, 22000);
+    // Mantém o postMessage como confirmação rápida. O polling por ID é o
+    // caminho de segurança para navegadores internos, como o do Instagram.
+    startConfirmationWatch(pendingSubmissionId);
   }
 
   form.addEventListener("submit", submitApplication);

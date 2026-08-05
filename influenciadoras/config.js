@@ -9,5 +9,7 @@ window.LBFIT_FORM_CONFIG = {
     "https://script.googleusercontent.com",
     "https://larabiagioni.com.br"
   ],
-  draftStorageKey: "lbfit-influencer-application-v2"
+  draftStorageKey: "lbfit-influencer-application-v2",
+  confirmationPollIntervalMs: 1100,
+  confirmationTimeoutMs: 30000
 };
