@@ -11,5 +11,7 @@ window.LBFIT_FORM_CONFIG = {
   ],
   draftStorageKey: "lbfit-influencer-application-v2",
   confirmationPollIntervalMs: 1100,
-  confirmationTimeoutMs: 30000
+  confirmationTimeoutMs: 9000,
+  optimisticSuccessDelayMs: 7000,
+  pendingSubmissionStorageKey: "lbfit-pending-submission-v1"
 };

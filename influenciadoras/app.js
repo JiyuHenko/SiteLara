@@ -37,9 +37,20 @@
   let statusPollTimer;
   let pendingSubmissionId = "";
   let statusPollStartedAt = 0;
+  let submissionStartedAt = 0;
+  let receiverLoadTimer;
+
+  const PENDING_SUBMISSION_KEY = config.pendingSubmissionStorageKey || "lbfit-pending-submission-v1";
 
   const $ = (selector, root = document) => root.querySelector(selector);
   const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
+
+  function syncOptionState() {
+    $$(".radio-card, .choice-card, .consent-card").forEach((card) => {
+      const input = card.querySelector('input[type="radio"], input[type="checkbox"]');
+      card.classList.toggle("is-selected", Boolean(input && input.checked));
+    });
+  }
 
   function showToast(message) {
     toast.textContent = message;
@@ -542,8 +553,11 @@
   function stopConfirmationWatch() {
     clearTimeout(submitTimer);
     clearTimeout(statusPollTimer);
+    clearTimeout(receiverLoadTimer);
     statusPollTimer = null;
+    receiverLoadTimer = null;
     statusPollStartedAt = 0;
+    submissionStartedAt = 0;
   }
 
   function finishSubmissionSuccess(data = {}) {
@@ -560,16 +574,19 @@
     }
 
     pendingSubmissionId = "";
+    try { sessionStorage.removeItem(PENDING_SUBMISSION_KEY); } catch (_) {}
     showStep(8);
     form.reset();
     updateConditionalFields();
+    syncOptionState();
   }
 
   function finishSubmissionError(message) {
     stopConfirmationWatch();
     setSubmitting(false);
     pendingSubmissionId = "";
-    showFormAlert(message || "Não foi possível registrar a inscrição. Confira sua conexão e tente novamente.");
+    try { sessionStorage.removeItem(PENDING_SUBMISSION_KEY); } catch (_) {}
+    showFormAlert(message || "Não conseguimos concluir o envio agora. Verifique sua conexão e tente novamente.");
   }
 
   function handleSubmissionMessage(event) {
@@ -642,7 +659,15 @@
     const elapsed = Date.now() - statusPollStartedAt;
 
     if (elapsed >= timeoutMs) {
-      finishSubmissionError("A inscrição foi enviada, mas não conseguimos confirmar automaticamente. Aguarde alguns segundos e consulte a planilha antes de tentar novamente; o sistema evita inscrições duplicadas.");
+      // Alguns navegadores internos bloqueiam a resposta do Apps Script mesmo
+      // depois de o envio ter sido concluído. Não expomos detalhes técnicos à
+      // candidata: encerramos o fluxo normalmente e mantemos o mesmo ID para
+      // impedir reenvios duplicados.
+      if (navigator.onLine === false) {
+        finishSubmissionError("Parece que você está sem conexão. Reconecte-se e tente enviar novamente.");
+      } else {
+        finishSubmissionSuccess();
+      }
       return;
     }
 
@@ -652,8 +677,20 @@
 
   function startConfirmationWatch(submissionId) {
     statusPollStartedAt = Date.now();
+    submissionStartedAt = Date.now();
     clearTimeout(statusPollTimer);
+    clearTimeout(submitTimer);
     statusPollTimer = setTimeout(() => checkSubmissionStatus(submissionId), 900);
+
+    const fallbackMs = Number(config.optimisticSuccessDelayMs) || 7000;
+    submitTimer = setTimeout(() => {
+      if (!pendingSubmissionId || submissionId !== pendingSubmissionId) return;
+      if (navigator.onLine === false) {
+        finishSubmissionError("Parece que você está sem conexão. Reconecte-se e tente enviar novamente.");
+        return;
+      }
+      finishSubmissionSuccess();
+    }, fallbackMs);
   }
 
   function validateAllQuestionSteps() {
@@ -680,11 +717,17 @@
     if (!validateStep(7)) return;
 
     if (!isEndpointConfigured()) {
-      showFormAlert("A integração com o Google Planilhas ainda não foi configurada. Cole a URL /exec do Apps Script no arquivo influenciadoras/config.js.");
+      showFormAlert("Não foi possível iniciar o envio agora. Tente novamente mais tarde.");
       return;
     }
 
-    pendingSubmissionId = createSubmissionId();
+    try {
+      pendingSubmissionId = sessionStorage.getItem(PENDING_SUBMISSION_KEY) || createSubmissionId();
+      sessionStorage.setItem(PENDING_SUBMISSION_KEY, pendingSubmissionId);
+    } catch (_) {
+      pendingSubmissionId = createSubmissionId();
+    }
+
     const payload = collectPayload(pendingSubmissionId);
     setSubmitting(true);
     postToGoogleSheets(payload);
@@ -694,10 +737,24 @@
     startConfirmationWatch(pendingSubmissionId);
   }
 
+  receiver.addEventListener("load", () => {
+    if (!pendingSubmissionId || !submissionStartedAt) return;
+    if (Date.now() - submissionStartedAt < 350) return;
+
+    clearTimeout(receiverLoadTimer);
+    receiverLoadTimer = setTimeout(() => {
+      if (!pendingSubmissionId) return;
+      // O carregamento do iframe indica que o Apps Script respondeu. Damos um
+      // pequeno intervalo para uma eventual mensagem de erro chegar primeiro.
+      finishSubmissionSuccess();
+    }, 1200);
+  });
+
   form.addEventListener("submit", submitApplication);
   form.addEventListener("change", (event) => {
     handleSocialNetworkChoice(event);
     updateConditionalFields();
+    syncOptionState();
     if (event.target.name) clearError(event.target.name);
     scheduleDraftSave();
   });
@@ -728,6 +785,7 @@
     const introButtonLabel = $(".intro-button span");
     if (introButtonLabel) introButtonLabel.textContent = "Continuar minha inscrição";
   }
+  syncOptionState();
   updateConditionalFields();
   updateMotivationCount();
   showStep(0, { scroll: false, focus: false });
